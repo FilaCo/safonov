@@ -3,8 +3,13 @@ from domain.entity.student import Student
 
 
 class Report:
-    def __init__(self, author: Student):
+    def __init__(self, id: "ReportId", author: Student):
+        self.__id = id
         self.__author = author
+
+
+class ReportId:
+    pass
 
 
 class PracticeKind(Enum):

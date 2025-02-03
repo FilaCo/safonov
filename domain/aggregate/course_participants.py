@@ -2,11 +2,11 @@ from dataclasses import dataclass
 from typing import Dict, List, Union
 from uuid import UUID
 
-from domain.entity.student import Student
+from domain.entity.student import Student, StudentId
 
 
 class CourseParticipants:
-    def __init__(self, participants: Dict[UUID, Student]):
+    def __init__(self, participants: Dict[StudentId, Student]):
         self.__participants = participants
 
     async def handle(self, command: "Command") -> List["Event"]:

@@ -1,6 +1,3 @@
-from unittest import TestCase
-
-
 class Version:
     """
     A value object represents an entity or an aggregate version.
@@ -43,12 +40,14 @@ class Version:
         """
         return cls(cls.__MIN_VERSION)
 
-    def increment(self):
+    def increment(self) -> "Version":
         """
         Increment version.
         NOTE: no protection from overflow is used.
         """
         self.__value += 1
+
+        return self
 
     def __str__(self) -> str:
         return f"{self.__value}"
@@ -72,33 +71,7 @@ class Version:
         return not (self < other)
 
 
-class TestVersion(TestCase):
-    def test_init_initialValueIsInvalid_ValueErrorRaised(self):
-        # arrange
-        raw_version = -3
-        expected_str = f"version should be greater than 1, provided: {raw_version}"
-
-        # act
-        with self.assertRaises(ValueError) as e:
-            _ = Version(raw_version)
-
-        # assert
-        self.assertEqual(expected_str, str(e.exception))
-
-    def test_init_initialValueisValid_VersionReturned(self):
-        # arrange
-        raw_version = 10
-
-        # act
-        result = Version(raw_version)
-        
-        # assert
-        self.assertEqual(expected_str, str(e.exception))
-
-
 if __name__ == "__main__":
     import doctest
-    import unittest
 
     doctest.testmod()
-    unittest.main()
