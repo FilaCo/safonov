@@ -13,7 +13,7 @@ COPY requirements.txt .
 
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.txt
 
-FROM python:3.13-slim
+FROM python:3.13-slim as final
 
 WORKDIR /app
 

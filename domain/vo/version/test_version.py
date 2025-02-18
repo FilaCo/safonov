@@ -4,10 +4,10 @@ from domain.vo.version import Version
 
 
 class TestVersion(TestCase):
-    def test_init_initialValueIsInvalid_ValueErrorRaised(self):
+    def test__init__InitialValueIsInvalid__ValueErrorRaised(self):
         # arrange
         raw_version = -3
-        expected_str = f"version should be greater than 1, provided: {raw_version}"
+        expected_str = f"version should be greater than 0, provided: {raw_version}"
 
         # act
         with self.assertRaises(ValueError) as actual:
@@ -16,7 +16,7 @@ class TestVersion(TestCase):
         # assert
         self.assertEqual(expected_str, str(actual.exception))
 
-    def test_init_initialValueisValid_VersionReturned(self):
+    def test__init__InitialValueisValid_VersionReturned(self):
         # arrange
         raw_version = 10
         expected = Version(10)
@@ -27,7 +27,7 @@ class TestVersion(TestCase):
         # assert
         self.assertEqual(expected, actual)
 
-    def test_increment_IncrementedVersionReturned(self):
+    def test__increment__IncrementedVersionReturned(self):
         # arrange
         version = Version(10)
         expected = Version(11)
@@ -38,9 +38,9 @@ class TestVersion(TestCase):
         # assert
         self.assertEqual(expected, actual)
 
-    def test_min_MinVersionReturned(self):
+    def test__min__MinVersionReturned(self):
         # arrange
-        expected = Version(1)
+        expected = Version(0)
 
         # act
         actual = Version.min()

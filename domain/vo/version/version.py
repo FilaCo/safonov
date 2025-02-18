@@ -4,13 +4,13 @@ class Version:
 
     >>> version = Version.min()
     >>> print(version)
-    1
+    0
     >>> version.increment()
     >>> print(version)
-    2
+    1
     """
 
-    __MIN_VERSION = 1
+    __MIN_VERSION = 0
     """
     A constant for minimal possible version value.
     """
@@ -21,12 +21,13 @@ class Version:
 
         Raises a ValueError exception if version value is invalid (less than minimal)
 
-        >>> version = Version(0)
+        >>> version = Version(-1)
         Traceback (most recent call last):
         ...
-        ValueError: version should be greater than 1, provided: 0
+        ValueError: version should be greater than 0, provided: -1
         """
         if value < Version.__MIN_VERSION:
+            # TODO: change to VersionError
             raise ValueError(
                 f"version should be greater than {Version.__MIN_VERSION}, provided: {value}"
             )
@@ -40,14 +41,12 @@ class Version:
         """
         return cls(cls.__MIN_VERSION)
 
-    def increment(self) -> "Version":
+    def increment(self):
         """
         Increment version.
         NOTE: no protection from overflow is used.
         """
         self.__value += 1
-
-        return self
 
     def __str__(self) -> str:
         return f"{self.__value}"
